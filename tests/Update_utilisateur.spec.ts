@@ -1,23 +1,44 @@
 import { test, expect } from '@playwright/test';
+import {pageHome} from "../pages/pageHome.ts";
+import {pageLogin} from "../pages/pageLogin.ts";
+import {sidebar} from "../pages/sidebar.ts";
+import { pageProfil } from "../pages/pageProfil.ts";
+let ph : pageHome
+let pl : pageLogin
+let sb : sidebar
+let pp : pageProfil
 
+test.beforeEach('setup', async({page})=>{
+  ph = new pageHome(page) ;
+  pl = new pageLogin(page) ;
+  sb = new sidebar(page) ;
+  pp = new pageProfil(page) ;
+  // await page.goto("https://thrundrz.fr/gestion/");
+  // await ph.Se_connecter();
+  });
 
+test('connexion with credentials', async ({page}) => {
+      await page.goto("https://thrundrz.fr/gestion/");
+      await ph.Se_connecter();
+      await expect(page).toHaveURL("https://thrundrz.fr/gestion/login")
+      pl.saisieEmail("testeur@gmail.com")
+      // pl.saisiePassword("testeur2024@")
+      // pl.Se_connecter()
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  // Un message doit apparaître :👉 "Connexion réussie ✅"
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+  //Accès au profil
+  // Cliquer sur le bouton "Profil" dans la sidebar
+  //sb.clickProfil
+
 });
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
+
+
+
+
 
 
 //  Accès au site

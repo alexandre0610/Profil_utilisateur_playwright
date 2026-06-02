@@ -21,35 +21,35 @@ export class pageHome {
     }
 
     
-    async se_connecter(){
-    await this.elements.Se_connecter().click()
+    async Se_connecter(){
+        await this.elements.Se_connecter().click()
     }
 
     async creation_du_compte(){
-    await  this.elements.creation_du_compte().click()
+        await  this.elements.creation_du_compte().click()
     }
 
     async Influenceur(){
-    await this.elements.Influenceur().click()
+        await this.elements.Influenceur().click()
     }
 
     async Tarifs(){
-    await this.elements.Tarifs().click()
+        await this.elements.Tarifs().click()
     }
 
     async Services(){
-    await this.elements.Services().click()
+        await this.elements.Services().click()
     }
 
     async Accompagner(){
-    await this.elements.Accompagner().click()
+        await this.elements.Accompagner().click()
     }
 
     async Acceuil(){
-    await this.elements.Acceuil().click()
+        await this.elements.Acceuil().click()
     }
 
-    async Contacter_Nous(){
+        async Contacter_Nous(){
     await this.elements.Contacter_Nous().click()
     }
        

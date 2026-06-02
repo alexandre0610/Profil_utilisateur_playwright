@@ -16,8 +16,8 @@ elements={
     code_postal : ()=> this.page.locator("css=select[name='code_postal']") , // a verifiergr
     ville : ()=> this.page.locator('[name="ville"]') ,
     TVA: ()=> this.page.locator("xpath=//input[@id='TVA incluse (obligatoire pour votre statut)']") ,
-    btn_55: ()=> this.page.locator("xpath=//input[@id='5.5%']") ,
-    btn_20: ()=> this.page.locator("xpath=//input[@id='20%']") ,
+    btn_55: ()=> this.page.locator('xpath://label[contains(text(),"5.5%")]//input[@type="checkbox"]') ,
+    btn_20: ()=> this.page.locator('xpath://label[contains(text(),"20%")]//input[@type="checkbox"]') ,
     Sauvegarder: ()=> this.page.getByRole("button",{name:"Sauvegarder"}) ,
 
 }
