@@ -10,18 +10,18 @@ export class pageHome {
 
     elements={
         Se_connecter:()=> this.page.getByRole("link",{name:"Se connecter"}) ,
-        creation_du_compte:()=> this.page.getByRole("link",{name:"creation_du_compte"}) ,
+        creation_du_compte:()=> this.page.getByRole("link",{name:"creation du compte"}) ,
         Influenceur:()=> this.page.getByRole("link",{name:"Influenceur"}) ,
         Tarifs:()=> this.page.getByRole("link",{name:"Tarifs"}) ,
         Services:()=> this.page.getByRole("link",{name:"Services"}) ,
         Accompagner:()=> this.page.getByRole("link",{name:"Accompagner"}) ,
         Acceuil:()=> this.page.getByRole("link",{name:"Acceuil"}) ,
-        Contacter_Nous:()=> this.page.getByRole("link",{name:"creation_du_compte"})
+        Contacter_Nous:()=> this.page.getByRole("link",{name:"creation du compte"})
 
     }
 
     
-    async Se_connecter(){
+    async clickSeconnecter(){
         await this.elements.Se_connecter().click()
     }
 

@@ -14,7 +14,7 @@ export class sidebar {
         Factures : ()=> this.page.locator("xpath=//button[text()='Factures']"),
         Avoirs : ()=> this.page.locator("xpath=//button[text()='Avoirs']"),
         Relancer : ()=> this.page.locator("xpath=//button[text()='Relancer']"),
-        Profil : ()=> this.page.locator("xpath=//button[text()='Profil']"),
+        Profil : ()=> this.page.locator('xpath=//button[.//p[text()="Profil"]]'),
         Se_déconnecter : ()=> this.page.locator("xpath=//button[text()='Se déconnecter']"),
 
     }
@@ -44,6 +44,7 @@ export class sidebar {
     }
 
     async clickProfil(){
+        await this.elements.Profil().waitFor({ state: "visible", timeout: 60000 })
         await this.elements.Profil().click();
         
     }

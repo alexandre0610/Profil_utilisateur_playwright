@@ -15,15 +15,24 @@ export class pageLogin {
         creer_compte:()=> this.page.getByRole("button",{name:"Créer un compte "})
 
     }
-
-
-    async saisieEmail(e: string){
-        await this.elements.email().fill(e)
+    async saisieEmail(e: string) {
+    //await this.elements.email().waitFor({ state: "visible", timeout: 15000 });
+    await this.elements.email().fill(e);
     }
 
-    async saisiePassword(p:string){
-        await this.elements.password().fill(p) ;
-    }
+
+    // async saisieEmail(e:string){
+
+    //     await this.elements.email().fill(e)
+    // }
+
+    // async saisiePassword(p:string){
+    //     await this.elements.password().fill(p) ;
+    // }
+    async saisiePassword(p: string) {
+    //await this.elements.password().waitFor({ state: "visible", timeout: 15000 });
+    await this.elements.password().fill(p);
+}
 
     // async se_souvenir(){
     // await this.elements.se_souvenir().check() ;

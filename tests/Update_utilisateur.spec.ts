@@ -1,35 +1,59 @@
 import { test, expect } from '@playwright/test';
-import {pageHome} from "../pages/pageHome.ts";
-import {pageLogin} from "../pages/pageLogin.ts";
-import {sidebar} from "../pages/sidebar.ts";
-import { pageProfil } from "../pages/pageProfil.ts";
-let ph : pageHome
-let pl : pageLogin
-let sb : sidebar
-let pp : pageProfil
+import { pageHome } from "../pages/pageHome.page.ts";
+import { pageLogin } from "../pages/pageLogin.page.ts";
+import { sidebar } from "../pages/sidebar.page.ts";
+import { pageProfil } from "../pages/pageProfil.page.ts";
+let ph: pageHome
+let pl: pageLogin
+let sb: sidebar
+let prof: pageProfil
 
 test.beforeEach('setup', async({page})=>{
-  ph = new pageHome(page) ;
-  pl = new pageLogin(page) ;
-  sb = new sidebar(page) ;
-  pp = new pageProfil(page) ;
-  // await page.goto("https://thrundrz.fr/gestion/");
-  // await ph.Se_connecter();
+  ph = new pageHome(page);
+  pl = new pageLogin(page);
+  sb = new sidebar(page);
+  prof = new pageProfil(page);
+  await page.goto("https://thrundrz.fr/gestion",{
+    waitUntil: "domcontentloaded", // ✅
+    timeout: 60000                // ✅
+    
   });
+  //await page.goto("https://thrundrz.fr/gestion");
+  // await ph.Se_connecter();
+});
 
-test('connexion with credentials', async ({page}) => {
-      await page.goto("https://thrundrz.fr/gestion/");
-      await ph.Se_connecter();
-      await expect(page).toHaveURL("https://thrundrz.fr/gestion/login")
-      pl.saisieEmail("testeur@gmail.com")
-      // pl.saisiePassword("testeur2024@")
-      // pl.Se_connecter()
+test('connexion with credentials', async({page})=>{
 
+  // await page.goto("https://thrundrz.fr/gestion");
+  await ph.clickSeconnecter();
+  await expect(page).toHaveURL("https://thrundrz.fr/gestion/login")
+  await pl.connexion("testeur@gmail.com", "testeur2024@")
   // Un message doit apparaître :👉 "Connexion réussie ✅"
-
   //Accès au profil
   // Cliquer sur le bouton "Profil" dans la sidebar
-  //sb.clickProfil
+  await sb.clickProfil()
+  // Vérifier que l’URL est :👉 https://thrundrz.fr/gestion/EspaceClient/profil
+  await expect(page).toHaveURL("https://thrundrz.fr/gestion/EspaceClient/profil")
+  //Type d’entreprise : SASU
+  await prof.choisirFormeJuridique("SARL")
+  //  Nom commercial
+  await prof.saisieNom_com("alex")
+  // Adresse
+  await prof.saisieAdresse1("58 rue des noie")
+  // Code postal
+  await prof.saisiCodePostale("75015")
+  // Ville
+  await prof.saisieVille("barcelone")
+  // Capital
+  await prof.saisieCapital("madrid")
+  // Sélectionner obligatoirement les taux de TVA :
+  await prof.checkTva()
+  // 5.5%
+  await prof.checkbtn_55()
+  // 20%
+  await prof.checkbtn_20()
+  // Cliquer sur " Sauvegarder"
+  await prof.clickSauvegarder
 
 });
 
@@ -58,15 +82,6 @@ test('connexion with credentials', async ({page}) => {
 // Vérifier que l’URL est :👉 https://thrundrz.fr/gestion/EspaceClient/profil
 
 
-//Type d’entreprise : SASU
-//  Nom commercial
-// Adresse
-// Code postal
-// Ville
-// Capital
-// Sélectionner obligatoirement les taux de TVA :
-// 5.5%
-// 20%
-// Cliquer sur " Sauvegarder"
+
 
 // Un message doit s’afficher :👉 "Profil mis à jour avec succès"
